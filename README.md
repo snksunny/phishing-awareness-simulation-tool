@@ -14,7 +14,7 @@ Intended for running and testing LOCALLY;
 ## Setup
 
 1. Clone the repo
-2. Create and anctivate a virtual environment
+2. Create and activate a virtual environment
 3. Install dependencies: 'pip install -r requirements.txt'
 4. Create a '.env' file with:
     - SMTP_USERNAME=your_email@ gmail.com 
