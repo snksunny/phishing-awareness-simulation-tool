@@ -1,6 +1,6 @@
 # phishing-awareness-simulation-tool
 
-This is a tool that sends a mock phising email to a list of recipients and tracks
+This is a tool that sends a mock phishing email to a list of recipients and tracks
 whether they click the link, to help improve security awareness.
 Intended for running and testing LOCALLY;
 

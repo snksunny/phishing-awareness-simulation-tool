@@ -25,4 +25,4 @@ def landing_page(tracking_id): #defines the function for the landing page, passe
     """
 
 if __name__ == "__main__": #checks if the file is being run directly and not imported into another file
-    app.run(debug=True) #runs the app in debug mode
+    app.run(debug=True) #runs the app in debug mode, never run True on any network-exposed machine, only LOCALLY
