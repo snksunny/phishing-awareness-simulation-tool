@@ -1,4 +1,4 @@
 *.zip
-*.venv
-*.env
+.venv/
+.env
 *.csv

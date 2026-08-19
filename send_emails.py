@@ -20,23 +20,24 @@ with open("targets.csv", "r") as file:
     server.starttls() #starts TLS encryption for the SMTP connection
     server.login(smtp_username, smtp_password) #logs in to the SMTP server using the
 
-    for row in reader: #iterates through each row in the CSV file
-        name = row["name"] #gets the name from the current row
-        email = row["email"] #gets the email from the current row
-        tracking_id = row["tracking_id"] #gets the tracking ID from the current row
+    try: #precaution if anything fails mid loop
+        for row in reader: #iterates through each row in the CSV file
+            name = row["name"] #gets the name from the current row
+            email = row["email"] #gets the email from the current row
+            tracking_id = row["tracking_id"] #gets the tracking ID from the current row
 
-        tracking_link = f"http://127.0.0.1:5000/landing/{tracking_id}" #creates a tracking link using the tracking ID
+            tracking_link = f"http://127.0.0.1:5000/landing/{tracking_id}" #creates a tracking link using the tracking ID
 
-        personalized_email = email_template.replace("{{name}}", name).replace("{{tracking_link}}", tracking_link) #replaces the placeholders in the email template with the actual name and tracking link
+            personalized_email = email_template.replace("{{name}}", name).replace("{{tracking_link}}", tracking_link) #replaces the placeholders in the email template with the actual name and tracking link
 
-        msg = MIMEMultipart() #creates a multipart email message
-        msg['From'] = smtp_username #sets the sender's email address
-        msg['To'] = email #sets the recipient's email address
-        msg['Subject'] = "Personalized Email" #sets the subject of the email
+            msg = MIMEMultipart() #creates a multipart email message
+            msg['From'] = smtp_username #sets the sender's email address
+            msg['To'] = email #sets the recipient's email address
+            msg['Subject'] = "Personalized Email" #sets the subject of the email
 
-        msg.attach(MIMEText(personalized_email, 'html')) #attaches the personalized email as an HTML message
+            msg.attach(MIMEText(personalized_email, 'html')) #attaches the personalized email as an HTML message
 
-        server.send_message(msg) #sends the email message
-        print(f"Email sent to {email}") #prints a message indicating that the email was sent
-
-    server.quit() #closes the connection to the SMTP server
+            server.send_message(msg) #sends the email message
+            print(f"Email sent to {email}") #prints a message indicating that the email was sent
+    finally:
+        server.quit() #closes the connection to the SMTP server
